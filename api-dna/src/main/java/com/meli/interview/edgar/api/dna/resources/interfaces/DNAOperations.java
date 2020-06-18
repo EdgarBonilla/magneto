@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping(value = "/")
+@RequestMapping
 public interface DNAOperations {
 
-  @PostMapping(value = "mutant/", produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value = "/mutant/", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<String> validateMutantDNA(@RequestBody DNARequest dnaRequest);
 
-  @GetMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/stats/", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<StatsDTO> retrieveStats();
 }
