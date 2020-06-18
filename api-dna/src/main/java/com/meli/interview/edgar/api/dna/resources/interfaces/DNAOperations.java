@@ -2,6 +2,7 @@ package com.meli.interview.edgar.api.dna.resources.interfaces;
 
 import com.meli.interview.edgar.api.dna.domain.DNARequest;
 import com.meli.interview.edgar.api.dna.domain.StatsDTO;
+import javax.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface DNAOperations {
 
   @PostMapping(value = "/mutant/", produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<String> validateMutantDNA(@RequestBody DNARequest dnaRequest);
+  ResponseEntity<String> validateMutantDNA(@Valid @RequestBody DNARequest dnaRequest);
 
   @GetMapping(value = "/stats/", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<StatsDTO> retrieveStats();

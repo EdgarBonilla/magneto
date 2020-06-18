@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DNAProcessor {
 
-  public boolean processListDNA(List<String> dna) {
+  public boolean processDNA(List<String> dna) {
     return true;
   }
 }
