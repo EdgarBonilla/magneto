@@ -28,7 +28,7 @@ public class DNAServiceErrorAdvice {
     return error(INTERNAL_SERVER_ERROR, exception);
   }
 
-  private ResponseEntity<String> error(HttpStatus status, Exception e) {
-    return ResponseEntity.status(status).body(e.getMessage());
+  private ResponseEntity<String> error(HttpStatus status, Exception exception) {
+    return ResponseEntity.status(status).body(exception.getMessage());
   }
 }
