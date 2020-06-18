@@ -8,7 +8,9 @@ import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class APIValidator implements Validator<DNARequest> {
 
   private static final String MSG_NUMERIC_LIST = "NOT_ALLOWED_NUMERIC_LIST";
