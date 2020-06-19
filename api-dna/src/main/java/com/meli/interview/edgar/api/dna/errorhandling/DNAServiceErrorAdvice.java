@@ -13,22 +13,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class DNAServiceErrorAdvice {
 
   @ExceptionHandler({DNAException.class})
-  public ResponseEntity<String> handleDNAException(DNAException exception) {
+  public ResponseEntity<Object> handleDNAException(DNAException exception) {
     return error(BAD_REQUEST, exception);
   }
 
   @ExceptionHandler({MethodArgumentNotValidException.class})
-  public ResponseEntity<String> handleConstraintViolation(
+  public ResponseEntity<Object> handleConstraintViolation(
       MethodArgumentNotValidException exception) {
     return error(BAD_REQUEST, exception);
   }
 
   @ExceptionHandler({RuntimeException.class})
-  public ResponseEntity<String> handleRunTimeException(RuntimeException exception) {
+  public ResponseEntity<Object> handleRunTimeException(RuntimeException exception) {
     return error(INTERNAL_SERVER_ERROR, exception);
   }
 
-  private ResponseEntity<String> error(HttpStatus status, Exception exception) {
-    return ResponseEntity.status(status).body(exception.getMessage());
+  private ResponseEntity<Object> error(HttpStatus status, Exception exception) {
+    return ResponseEntity.status(status)
+        .body(new DNAErrorHandling(status, exception.getLocalizedMessage()));
   }
 }

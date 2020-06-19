@@ -8,40 +8,74 @@ public class DNAProcessor {
 
   private char[][] wordBoard = null;
   private int indexRow;
+  private int dnaInputs;
 
   public boolean processDNA(List<String> dna) {
     indexRow = 0;
-    int dnaInputs = dna.size();
+    dnaInputs = dna.size();
     int dnaLength = dna.get(0).length();
     wordBoard = new char[dnaInputs][dnaLength];
 
     for (String dnaString : dna) {
-      initWorkBoard(dnaString, wordBoard);
+      if (initWorkBoard(dnaString, wordBoard)) {
+        return Boolean.TRUE;
+      }
       indexRow++;
     }
 
-    //imprimir(wordBoard);
-
-    return false;
+    return verticalSearchCoincidence(wordBoard, dnaInputs);
   }
 
-  private void initWorkBoard(String dnaString, char[][] charBoard) {
-    for (int index = 0; index < dnaString.length(); index++) {
-      char letter = dnaString.charAt(index);
-      charBoard[indexRow][index] = letter;
+  private Boolean initWorkBoard(String dnaString, char[][] charBoard) {
+    Boolean isMutant = horizontalSearchCoincidence(dnaString);
+    if (!isMutant) {
+      for (int index = 0; index < dnaString.length(); index++) {
+        char letter = dnaString.charAt(index);
+        charBoard[indexRow][index] = letter;
+      }
     }
+
+    return isMutant;
   }
 
-  private void imprimir(char[][] wordBoard) {
-    for (int x = 0; x < wordBoard.length; x++) {
-      System.out.print("|");
-      for (int y = 0; y < wordBoard[x].length; y++) {
-        System.out.print(wordBoard[x][y]);
-        if (y != wordBoard[x].length - 1) {
-          System.out.print("\t");
+  private Boolean horizontalSearchCoincidence(String dnaString) {
+    char[] letters = dnaString.toCharArray();
+    char currentLetter = letters[0];
+    int countCoincidences = 0;
+    for (int row = 0; row < letters.length; row++) {
+      if (letters[row] == currentLetter) {
+        countCoincidences = countCoincidences + 1;
+      } else {
+        currentLetter = letters[row];
+        countCoincidences = 1;
+      }
+
+      if (countCoincidences == 4) {
+        return Boolean.TRUE;
+      }
+    }
+
+    return Boolean.FALSE;
+  }
+
+  private Boolean verticalSearchCoincidence(char[][] wordBoard, int dnaInputs) {
+    for (int i = 0; i < dnaInputs; i++) {
+      int axisY = i;
+      char currentLetter = wordBoard[0][axisY];
+      int countCoincidences = 0;
+      for (int axisX = 0; axisX < dnaInputs; axisX++) {
+        if (wordBoard[axisX][axisY] == currentLetter) {
+          countCoincidences = countCoincidences + 1;
+        } else {
+          currentLetter = wordBoard[axisX][axisY];
+          countCoincidences = 1;
+        }
+        if (countCoincidences == 4) {
+          return Boolean.TRUE;
         }
       }
-      System.out.println("|");
     }
+
+    return Boolean.FALSE;
   }
 }

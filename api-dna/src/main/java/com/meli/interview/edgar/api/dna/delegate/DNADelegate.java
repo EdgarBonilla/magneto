@@ -29,12 +29,7 @@ public class DNADelegate {
   }
 
   public boolean isMutant(List<String> dnaList) {
-    boolean isMutant = isDnaOnHorizontalSearch(dnaList);
-
-    if (!isMutant) {
-      isMutant = dnaProcessor.processDNA(dnaList);
-    }
-
+    boolean isMutant = dnaProcessor.processDNA(dnaList);
     List<StatsEntity> statsEntity = statsRepository.findAll();
     if (!CollectionUtils.isEmpty(statsEntity)) {
       saveCurrentStats(isMutant, statsEntity.get(ZERO));
@@ -43,14 +38,6 @@ public class DNADelegate {
     }
 
     return true;
-  }
-
-  private boolean isDnaOnHorizontalSearch(List<String> dnaList) {
-    return dnaList.stream().anyMatch(dnaString
-        -> dnaString.contains("AAAA")
-        || dnaString.contains("GGGG")
-        || dnaString.contains("TTTT")
-        || dnaString.contains("CCCC"));
   }
 
   public StatsDTO getStats() {
