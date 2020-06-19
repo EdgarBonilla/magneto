@@ -1,4 +1,4 @@
-package com.meli.interview.edgar.api.dna.errorhandling;
+package com.meli.interview.edgar.api.dna.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
