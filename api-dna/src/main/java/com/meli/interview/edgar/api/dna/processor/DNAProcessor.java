@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DNAProcessor {
 
+  private static final Integer FOUR = 4;
   private char[][] wordBoard = null;
   private int indexRow;
   private int dnaInputs;
@@ -50,7 +51,7 @@ public class DNAProcessor {
         countCoincidences = 1;
       }
 
-      if (countCoincidences == 4) {
+      if (countCoincidences == FOUR) {
         return Boolean.TRUE;
       }
     }
@@ -70,7 +71,7 @@ public class DNAProcessor {
           currentLetter = wordBoard[axisX][axisY];
           countCoincidences = 1;
         }
-        if (countCoincidences == 4) {
+        if (countCoincidences == FOUR) {
           return Boolean.TRUE;
         }
       }

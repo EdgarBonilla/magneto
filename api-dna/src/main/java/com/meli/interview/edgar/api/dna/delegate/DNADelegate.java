@@ -1,10 +1,14 @@
 package com.meli.interview.edgar.api.dna.delegate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.interview.edgar.api.dna.domain.StatsDTO;
+import com.meli.interview.edgar.api.dna.entity.DNAEntity;
 import com.meli.interview.edgar.api.dna.entity.StatsEntity;
 import com.meli.interview.edgar.api.dna.mapper.Mapper;
 import com.meli.interview.edgar.api.dna.mapper.StatsEntityToStatsDTOMapper;
 import com.meli.interview.edgar.api.dna.processor.DNAProcessor;
+import com.meli.interview.edgar.api.dna.repository.DNARepository;
 import com.meli.interview.edgar.api.dna.repository.StatsRepository;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,13 +23,16 @@ public class DNADelegate {
   private final DNAProcessor dnaProcessor;
   private final Mapper<StatsEntity, StatsDTO> statsEntityToStatsDTOMapper;
   private final JpaRepository<StatsEntity, Integer> statsRepository;
+  private final JpaRepository<DNAEntity, Integer> dnaRepository;
 
   public DNADelegate(DNAProcessor dnaProcessor,
       StatsEntityToStatsDTOMapper statsEntityToStatsDTOMapper,
-      StatsRepository statsRepository) {
+      StatsRepository statsRepository,
+      DNARepository dnaRepository) {
     this.dnaProcessor = dnaProcessor;
     this.statsEntityToStatsDTOMapper = statsEntityToStatsDTOMapper;
     this.statsRepository = statsRepository;
+    this.dnaRepository = dnaRepository;
   }
 
   public boolean isMutant(List<String> dnaList) {
@@ -35,6 +42,18 @@ public class DNADelegate {
       saveCurrentStats(isMutant, statsEntity.get(ZERO));
     } else {
       saveInitialStats(isMutant);
+    }
+
+    if (isMutant) {
+      try {
+        ObjectMapper object = new ObjectMapper();
+        String jsonStr = object.writeValueAsString(dnaList.toString());
+        DNAEntity dnaEntity = new DNAEntity();
+        dnaEntity.setDnaString(jsonStr);
+        dnaRepository.save(dnaEntity);
+      } catch (JsonProcessingException exception) {
+        exception.printStackTrace();
+      }
     }
 
     return true;
