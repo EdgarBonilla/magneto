@@ -9,7 +9,9 @@ public class DNAProcessor {
   private int indexRow = 0;
 
   public boolean processDNA(List<String> dna) {
-    char[][] wordBoard = new char[dna.size()][dna.get(0).length()];
+    int dnaInputs = dna.size();
+    int dnaLength = dna.get(0).length();
+    char[][] wordBoard = new char[dnaInputs][dnaLength];
 
     for (String dnaString : dna) {
       initWorkBoard(dnaString, wordBoard);
