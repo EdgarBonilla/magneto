@@ -3,18 +3,13 @@ package com.meli.interview.edgar.api.dna.resources;
 import com.meli.interview.edgar.api.dna.delegate.DNADelegate;
 import com.meli.interview.edgar.api.dna.domain.DNARequest;
 import com.meli.interview.edgar.api.dna.domain.StatsDTO;
-import com.meli.interview.edgar.api.dna.errorhandling.DNAException;
 import com.meli.interview.edgar.api.dna.resources.interfaces.DNAOperations;
 import com.meli.interview.edgar.api.dna.validator.APIValidator;
 import com.meli.interview.edgar.api.dna.validator.Validator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import javax.validation.ConstraintViolation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

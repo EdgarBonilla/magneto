@@ -6,18 +6,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class DNAProcessor {
 
-  private int indexRow = 0;
+  private char[][] wordBoard = null;
+  private int indexRow;
 
   public boolean processDNA(List<String> dna) {
+    indexRow = 0;
     int dnaInputs = dna.size();
     int dnaLength = dna.get(0).length();
-    char[][] wordBoard = new char[dnaInputs][dnaLength];
+    wordBoard = new char[dnaInputs][dnaLength];
 
     for (String dnaString : dna) {
       initWorkBoard(dnaString, wordBoard);
+      indexRow++;
     }
 
-    return true;
+    //imprimir(wordBoard);
+
+    return false;
   }
 
   private void initWorkBoard(String dnaString, char[][] charBoard) {
@@ -25,7 +30,18 @@ public class DNAProcessor {
       char letter = dnaString.charAt(index);
       charBoard[indexRow][index] = letter;
     }
+  }
 
-    indexRow++;
+  private void imprimir(char[][] wordBoard) {
+    for (int x = 0; x < wordBoard.length; x++) {
+      System.out.print("|");
+      for (int y = 0; y < wordBoard[x].length; y++) {
+        System.out.print(wordBoard[x][y]);
+        if (y != wordBoard[x].length - 1) {
+          System.out.print("\t");
+        }
+      }
+      System.out.println("|");
+    }
   }
 }
