@@ -1,13 +1,15 @@
 package com.meli.interview.edgar.api.dna.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DNAErrorHandling {
 
   private HttpStatus status;
