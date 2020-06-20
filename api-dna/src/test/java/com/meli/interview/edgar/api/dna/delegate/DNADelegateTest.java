@@ -44,11 +44,44 @@ public class DNADelegateTest {
   public void shouldDelegateIsMutantTest() {
     StatsEntity statsEntity = new StatsEntity();
     statsEntity.setMutant_dna(1);
-    statsEntity.setHuman_dna(1);
+    statsEntity.setHuman_dna(0);
     when(mockDnaProcessor.processDNA(any())).thenReturn(true);
     when(mockStatsRepository.findAll()).thenReturn(List.of(statsEntity));
 
     Boolean result = dnaDelegate.isMutant(List.of("AAAAC","AGTAC","AGAAC","TAACC","TCAAG"));
+
+    Assertions.assertEquals(Boolean.TRUE, result);
+  }
+
+  @Test
+  public void shouldDelegateIsMutantFalseTest() {
+    StatsEntity statsEntity = new StatsEntity();
+    statsEntity.setMutant_dna(0);
+    statsEntity.setHuman_dna(1);
+    when(mockDnaProcessor.processDNA(any())).thenReturn(false);
+    when(mockStatsRepository.findAll()).thenReturn(List.of(statsEntity));
+
+    Boolean result = dnaDelegate.isMutant(List.of("ACAAC","AGTAC","AGAAC","TAACC","TCAAG"));
+
+    Assertions.assertEquals(Boolean.TRUE, result);
+  }
+
+  @Test
+  public void shouldSaveInformationIsMutantTrueFirstTimeTest() {
+    when(mockDnaProcessor.processDNA(any())).thenReturn(true);
+    when(mockStatsRepository.findAll()).thenReturn(null);
+
+    Boolean result = dnaDelegate.isMutant(List.of("AAAAC","AGTAC","AGAAC","TAACC","TCAAG"));
+
+    Assertions.assertEquals(Boolean.TRUE, result);
+  }
+
+  @Test
+  public void shouldSaveInformationIsMutantFalseFirstTimeTest() {
+    when(mockDnaProcessor.processDNA(any())).thenReturn(false);
+    when(mockStatsRepository.findAll()).thenReturn(null);
+
+    Boolean result = dnaDelegate.isMutant(List.of("AACAC","AGTAC","AGAAC","TAACC","TCAAG"));
 
     Assertions.assertEquals(Boolean.TRUE, result);
   }

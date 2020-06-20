@@ -8,7 +8,7 @@ public class DNAExceptionTest {
   private static final String MESSAGE = "MOCKED_MESSAGE";
 
   @Test
-  public void shouldRetunrMessageDNAExceptionTest() {
+  public void shouldReturnMessageDNAExceptionTest() {
     DNAException dnaException = new DNAException(MESSAGE);
     Assertions.assertEquals(MESSAGE, dnaException.getMessage());
   }

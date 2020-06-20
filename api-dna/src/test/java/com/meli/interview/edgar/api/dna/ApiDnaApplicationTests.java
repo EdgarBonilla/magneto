@@ -10,4 +10,9 @@ class ApiDnaApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void applicationStarts() {
+		ApiDnaApplication.main(new String[] {});
+	}
+
 }
