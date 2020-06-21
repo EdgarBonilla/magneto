@@ -6,13 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ApiDnaApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+  @Test
+  void contextLoads() {
+  }
 
-	@Test
-	public void applicationStarts() {
-		ApiDnaApplication.main(new String[] {});
-	}
+  @Test
+  public void applicationStarts() {
+    ApiDnaApplication.main(new String[]{});
+  }
 
 }

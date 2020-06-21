@@ -48,7 +48,7 @@ public class DNADelegateTest {
     when(mockDnaProcessor.processDNA(any())).thenReturn(true);
     when(mockStatsRepository.findAll()).thenReturn(List.of(statsEntity));
 
-    Boolean result = dnaDelegate.isMutant(List.of("AAAAC","AGTAC","AGAAC","TAACC","TCAAG"));
+    Boolean result = dnaDelegate.isMutant(List.of("AAAAC", "AGTAC", "AGAAC", "TAACC", "TCAAG"));
 
     Assertions.assertEquals(Boolean.TRUE, result);
   }
@@ -61,7 +61,7 @@ public class DNADelegateTest {
     when(mockDnaProcessor.processDNA(any())).thenReturn(false);
     when(mockStatsRepository.findAll()).thenReturn(List.of(statsEntity));
 
-    Boolean result = dnaDelegate.isMutant(List.of("ACAAC","AGTAC","AGAAC","TAACC","TCAAG"));
+    Boolean result = dnaDelegate.isMutant(List.of("ACAAC", "AGTAC", "AGAAC", "TAACC", "TCAAG"));
 
     Assertions.assertEquals(Boolean.TRUE, result);
   }
@@ -71,7 +71,7 @@ public class DNADelegateTest {
     when(mockDnaProcessor.processDNA(any())).thenReturn(true);
     when(mockStatsRepository.findAll()).thenReturn(null);
 
-    Boolean result = dnaDelegate.isMutant(List.of("AAAAC","AGTAC","AGAAC","TAACC","TCAAG"));
+    Boolean result = dnaDelegate.isMutant(List.of("AAAAC", "AGTAC", "AGAAC", "TAACC", "TCAAG"));
 
     Assertions.assertEquals(Boolean.TRUE, result);
   }
@@ -81,7 +81,7 @@ public class DNADelegateTest {
     when(mockDnaProcessor.processDNA(any())).thenReturn(false);
     when(mockStatsRepository.findAll()).thenReturn(null);
 
-    Boolean result = dnaDelegate.isMutant(List.of("AACAC","AGTAC","AGAAC","TAACC","TCAAG"));
+    Boolean result = dnaDelegate.isMutant(List.of("AACAC", "AGTAC", "AGAAC", "TAACC", "TCAAG"));
 
     Assertions.assertEquals(Boolean.TRUE, result);
   }
