@@ -18,7 +18,16 @@ Then please search and open at whatever browser client the Jacoco code coverage 
 /build/jacocoHtml/index.html
 ```
 
-## Run Application
+## Call API REST on public cloud
+- POST https://aqueous-brushlands-42946.herokuapp.com/mutant/
+  Example RequesBody
+    {
+    "dna": ["AAATC","AGTAC","AGAAC","TAACT","TGAAG"]
+    }
+
+- GET https://aqueous-brushlands-42946.herokuapp.com/stats/
+
+## Run Application on local environment
 Running the application with the below command/task 
 ```sh
 ./gradlew bootRun
