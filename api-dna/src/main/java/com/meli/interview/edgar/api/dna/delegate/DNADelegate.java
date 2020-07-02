@@ -56,7 +56,7 @@ public class DNADelegate {
       }
     }
 
-    return true;
+    return isMutant;
   }
 
   public StatsDTO getStats() {
